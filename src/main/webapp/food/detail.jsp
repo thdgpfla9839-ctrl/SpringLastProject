@@ -18,7 +18,7 @@
       <table class="table">
         <tr>
           <td width=30% class="text-center" rowspan="8">
-            <img src="${vo.poster }" style="width: 290px;height: 250px"> 
+            <img src="${vo.poster }" style="width: 290px;height: 250px">  
           </td>
           <td colspan="2">
             <h3>${vo.name }&nbsp;<span style="color:orange;">${vo.score }</span></h3>
