@@ -1,14 +1,16 @@
 package com.sist.web;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 // 서비스에서 제공하는 결과값을 브라우저로 전송
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
-import com.sist.service.*;
-import com.sist.vo.*;
+import com.sist.service.BoardService;
+import com.sist.vo.BoardVO;
 
 import lombok.RequiredArgsConstructor;
 @Controller
@@ -35,8 +37,7 @@ public class BoardController {
 		model.addAttribute("curpage",curpage);
 		model.addAttribute("totalpage",totalpage);
 		model.addAttribute("count",count);
-		model.addAttribute("today",new SimpleDateFormat("yyyy-mm-dd").format(new Date()));
-		
+		model.addAttribute("today", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 		model.addAttribute("main_jsp","../board/list.jsp");
 		return "main/main"; // 포워드 기법 => 리퀘스트를 전송할 목족
 	}
@@ -59,10 +60,24 @@ public class BoardController {
 	@GetMapping("board/detail.do")
 	public String board_detail(int no, Model model)
 	{
-		BoardVO vo =bService.boardDetailData(no);
+		BoardVO vo=bService.boardDetailData(no);
 		model.addAttribute("vo",vo);
 		model.addAttribute("main_jsp","../board/detail.jsp");
 		return "main/main";
 	}
 	
+	@GetMapping("board/reply.do")
+	public String board_reply(int no, Model model)
+	{
+		model.addAttribute("no",no); // 누구 게시글에 대한 답글인지를 위해 써준다
+		model.addAttribute("main_jsp","../board/reply.jsp");
+		return "main/main";
+	}
+	
+	@PostMapping("board/reply_ok.do")
+	public String board_reply_ok(int pno, BoardVO vo)
+	{
+	   bService.boardReplyInsert(pno, vo);
+	   return "redirect:../board/list.do";	
+	}
 }

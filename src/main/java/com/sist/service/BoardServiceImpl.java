@@ -53,6 +53,7 @@ public class BoardServiceImpl implements BoardService{
 	public void boardReplyInsert(int pno, BoardVO vo) {
 		// TODO Auto-generated method stub
 		BoardVO pvo = mapper.boardParentInfoData(pno);
+		
 		mapper.boardStepIncrement(pvo.getGroup_id(), pvo.getGroup_step());
 		
 		vo.setGroup_id(pvo.getGroup_id());

@@ -18,13 +18,14 @@ h3 {
 <body>
   <div class="container">
     <div class="row">
-      <h3>글쓰기</h3>
-      <form method="post" action="../board/insert_ok.do">
+      <h3>답변하기</h3>
+      <form method="post" action="../board/reply_ok.do">
       <table class="table">
         <tr>
          <th width=15% class="text-center success">이름</th>
          <td width="85%">
            <input type=text name=name size=20 class="input-sm" required>
+           <input type="hidden" name=pno value="${no }"> <!--  pno는 상위번호를 의미 -->
          </td>
         </tr>
         <tr>
@@ -47,7 +48,7 @@ h3 {
         </tr>
         <tr>
           <td colspan="2" class="text-center">
-            <button class="btn-sm btn-danger" type=submit>글쓰기</button>
+            <button class="btn-sm btn-danger" type=submit>답변</button>
             <button class="btn-sm btn-danger" type=button
              onclick="javascript:history.back()"
             >취소</button>

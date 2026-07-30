@@ -52,27 +52,29 @@ public interface BoardMapper {
 	// 1. 답변하기 => 여기서 트랜젝션 사용할 예정
 	// 1) 상위 데이터 읽기
 	@Select("SELECT group_id,group_step,group_tab "
-			+"FROM SpringReplyBoard "
-			+"WHERE no=#{no}")
-	public BoardVO boardParentInfoData(int no);
+			 +"FROM springReplyBoard "
+			 +"WHERE no=#{no}")
+	  public BoardVO boardParentInfoData(int no);
 	
 	// 2) update
-	@Update("UPDATE SpringReplyBoard SET "
-			+"group_step=group_step+1 "
-			+"WHERE group_id=#{group_id} AND group_step>#{group_step}")
-	public void boardStepIncrement(@Param("group_id") int group_id, @Param("group_step") int group_step); // 이 안에는 vo를 쓰거나 map을 쓰거나 혹은 지금처럼 쓸 수 잇다
+	@Update("UPDATE springReplyBoard SET "
+			 +"group_step=group_step+1 "
+			 +"WHERE group_id=#{group_id} AND group_step>#{group_step}")
+	  public void boardStepIncrement(@Param("group_id") int group_id,
+			  @Param("group_step") int group_step); // 이 안에는 vo를 쓰거나 map을 쓰거나 혹은 지금처럼 쓸 수 잇다
 	
 	// 3) insert
-	@Insert("INSERT INTO SpringReplyBoard(no,name,subject,content,pwd,group_id,group_step,group_tab,root,depth) "
-			+"VALUES(srb_no_seq.nextval,#{name},#{subject},#{content},#{pwd},"
-			+"#{group_id},#{group_step},#{group_tab},#{root},#{depth})")
-	public void boardReplyInsert(BoardVO vo);
+	@Insert("INSERT INTO springReplyBoard(no,name,subject,content,pwd,group_id,group_step,group_tab,root,depth) "
+			 +"VALUES(srb_no_seq.nextval,#{name},#{subject},"
+			 +"#{content},#{pwd},"
+			 +"#{group_id},#{group_step},#{group_tab},#{root},#{depth})")
+ public void boardReplyInsert(BoardVO vo);
 	
 	// 4) update
-	@Update("UPDATE SpringReplyBoard SET "
-			+"depth=depth+1 "
-			+"WHERE no=#{no}")
-	public void boardDepthIncrement(int no);
+	 @Update("UPDATE springReplyBoard SET "
+			 +"depth=depth+1 "
+			 +"WHERE no=#{no}")
+	  public void boardDepthIncrement(int no);
 	
 	// 2. 수정
 	// 3. 삭제  => 여기도 트랜젝션 사용

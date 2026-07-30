@@ -15,7 +15,7 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
       <li><a href="#">스토어</a></li>
-      <li><a href="../board/list.do" style="color: blue;">답변형 게시판 - 트랜젝션 이용</a></li> 
+      <li><a href="../board/list.do" style="color: white">답변형 게시판 - 트랜젝션 이용</a></li> 
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-user"></span> 로그아웃</a></li>
