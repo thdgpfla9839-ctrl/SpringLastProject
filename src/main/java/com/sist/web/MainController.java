@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class MainController {
 
-	private final GoodsService gService; // ÀÌ°Ô DB
+	private final GoodsService gService; // ï¿½Ì°ï¿½ DB
 	
 	@GetMapping("main/main.do")
-	public String main_main(String page, Model model,HttpServletRequest request) // ÄíÅ° °¡Á®¿Í¾ßÇØ¼­ requset¸¦ Ãß°¡ÇØÁÜ
+	public String main_main(String page, Model model,HttpServletRequest request) // ï¿½ï¿½Å° ï¿½ï¿½ï¿½ï¿½ï¿½Í¾ï¿½ï¿½Ø¼ï¿½ requsetï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½
 	{
 		if(page==null)
 			page="1";
@@ -34,7 +34,7 @@ public class MainController {
 		List<GoodsVO> list = gService.goodsListData(start, end);
 		int totalpage = gService.goodsTotalPage();
 		
-		// ÆäÀÌÁö ³ª´©±â
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		final int BLOCK=10;
 		int startPage = ((curpage-1)/BLOCK*BLOCK)+1;
 		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
@@ -42,7 +42,6 @@ public class MainController {
 		if(endPage>totalpage)
 			endPage=totalpage;
 		
-		// Ãâ·ÂÇÒ ³»¿ë º¸³»±â
 		model.addAttribute("list",list);
 		model.addAttribute("curpage",curpage);
 		model.addAttribute("totalpage",totalpage);
@@ -55,10 +54,10 @@ public class MainController {
 		Cookie[] cookies = request.getCookies();
 		if(cookies!=null)
 		{
-			// ¹æ¹®±â·Ï ÃÖ½Å¼øÀ¸·Î °¡Á®¿À±â
+			
 			for(int i=cookies.length-1;i>=0;i--)
 			{
-				if(cookies[i].getName().startsWith("goods_")) // Áö±ÝÀº Å°¸¦ °¡Á®¿À±â À§ÇØ °Ù³×ÀÓÇÔ
+				if(cookies[i].getName().startsWith("goods_")) 
 				{
 					if(cookies[i].getName().equals("goods_null"))
 						continue;
@@ -73,12 +72,7 @@ public class MainController {
 	    model.addAttribute("cList", cList);
 	    model.addAttribute("size",cList.size());
 	    
-	    /*
-	     *  ³»Àå°´Ã¼ÀÇ »ç¿ëÃ³ ¾Ë±â
-	     *  request / response = > ÄíÅ°³ª ÆÄÀÏ¾÷·Îµå¿¡¼­ ¸¹ÀÌ »ç¿ë
-	     *  session => º¸¾ÈÃ³¸®³ª È¸¿ø °ü·Ã¿¡¼­ ¸¹ÀÌ »ç¿ë
-	     *  RedirectAttributes => ÀÌ¹Ì ÀÖ´Â È­¸éÀ¸·Î ÀÌµ¿ÇÒ ¶§
-	     */
+	  
 		return "main/main";
 	}
 }
