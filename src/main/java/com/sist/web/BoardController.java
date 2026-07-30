@@ -55,4 +55,14 @@ public class BoardController {
 		
 		return "redirect:../board/list.do";
 	}
+	
+	@GetMapping("board/detail.do")
+	public String board_detail(int no, Model model)
+	{
+		BoardVO vo =bService.boardDetailData(no);
+		model.addAttribute("vo",vo);
+		model.addAttribute("main_jsp","../board/detail.jsp");
+		return "main/main";
+	}
+	
 }

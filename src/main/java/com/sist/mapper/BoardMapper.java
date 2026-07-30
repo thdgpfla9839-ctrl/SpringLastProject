@@ -44,7 +44,7 @@ public interface BoardMapper {
 			+"WHERE no=#{no}")
 	public void boardHitIncrement(int no);
 	
-	@Select("SELECT no,name,subject,content,TO_CHAR(regdate,'yyyy-mm-dd') ad dbday,hit "
+	@Select("SELECT no,name,subject,content,TO_CHAR(regdate,'yyyy-mm-dd') as dbday,hit "
 			+"FROM SpringReplyBoard "
 			+"WHERE no=#{no}")
 	public BoardVO boardDetailData(int no);
