@@ -77,6 +77,11 @@ public interface BoardMapper {
 	  public void boardDepthIncrement(int no);
 	
 	// 2. 수정
+	 @Update("UPDATE springReplyBoard "
+	 		 +"SET subject=#{subject},content=#{content} "
+			 +"WHERE no=#{no}")
+	 public void boardUpdateData(BoardVO vo);
+	 
 	// 3. 삭제  => 여기도 트랜젝션 사용
 	
 }

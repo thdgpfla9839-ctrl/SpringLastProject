@@ -5,6 +5,7 @@ import java.util.List;
 
 // 서비스에서 제공하는 결과값을 브라우저로 전송
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class BoardController {
 
 	private final BoardService bService;
+
 	
 	@GetMapping("board/list.do")
 	public String board_list(String page, Model model)
@@ -79,5 +81,16 @@ public class BoardController {
 	{
 	   bService.boardReplyInsert(pno, vo);
 	   return "redirect:../board/list.do";	
+	}
+	
+	// 게시글 수정하기
+	@GetMapping("board/update.do")
+	public String board_update(int no, Model model)
+	{
+		BoardVO vo = bService.boardDetailData(no);
+		
+		model.addAttribute("vo",vo);
+		model.addAttribute("main_jsp","../board/update.jsp");
+		return "main/main";
 	}
 }

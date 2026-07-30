@@ -65,5 +65,14 @@ public class BoardServiceImpl implements BoardService{
 		mapper.boardDepthIncrement(pno);
 	}
 
+	// 수정하기
+	@Override
+	public void boardUpdateData(BoardVO vo) {
+		// TODO Auto-generated method stub
+		mapper.boardUpdateData(vo);
+		
+		
+	}
+
 	
 }

@@ -16,6 +16,8 @@ public interface BoardService {
     public BoardVO boardDetailData(int no);
 		// 답변하기
 	public void boardReplyInsert(int pno, BoardVO vo);
+	// 수정하기
+	 public void boardUpdateData(BoardVO vo);
 		
 		
 		
