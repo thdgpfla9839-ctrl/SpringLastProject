@@ -15,7 +15,7 @@ jobs:
     # 깃에서 war 파일 묶기
     defaults:
       run:
-        working-directory: SpringLastProject
+        working-directory: .
 
     steps:
       - name: Checkout
