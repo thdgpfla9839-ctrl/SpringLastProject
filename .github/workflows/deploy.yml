@@ -4,7 +4,7 @@ name: Java CI with Maven
 # 우리는 master에 올려서 괄호에 master 적음
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 # CI/CD 작업을 어떻게 할지
 jobs:
