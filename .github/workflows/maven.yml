@@ -1,47 +1,47 @@
-
 name: Java CI with Maven
+
 # 이벤트처리 master에서 commit  & push가 날라온 경우
 # 우리는 master에 올려서 괄호에 master 적음
 on:
   push:
     branches: [ "master" ]
-    
-# CI/CD 작업을 어떻게 할지 
+
+# CI/CD 작업을 어떻게 할지
 jobs:
- deploy:
-  runs-on: self-hosted
+  deploy:
+    runs-on: self-hosted
 
-# 모든 명령의 기본 작업 순서(디렉토리)를 지정
-# 깃에서 war 파일 묶기
- defaults:
-   run:
-     working-directory: SpringLastProject
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Maven Build
-      run: mvn clean package -DskipTaests
+    # 모든 명령의 기본 작업 순서(디렉토리)를 지정
+    # 깃에서 war 파일 묶기
+    defaults:
+      run:
+        working-directory: SpringLastProject
 
-# tomcat 죽이기 톰캣버전 모르면 뒤에* 붙이기
-    - name : Stop Tomcat
-      run: |
-       /home/sist/apache-tomcat-9.0.120/bin/shutdown.sh || true
-       sleep 3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-# .war파일이랑 압축이 풀어진 폴더 지우기
-    - name: Remove Old war   
-      run: |
-       rm -rf  /home/sist/apache-tomcat-9.0.120/webapps/SpringLastProject.war
-       rm -rf  /home/sist/apache-tomcat-9.0.120/webapps/SpringLastProject
-    - name: Deploy war
-      run: |
-       cp target/*.war /home/sist/apache-tomcat-9.0.120/webapps/SpringLastProject.war
+      - name: Maven Build
+        run: mvn clean package -DskipTests
 
-# tomcat 구동
-    - name: Tomcat start
-      run: |
-       nohup /home/sist/apache-tomcat-9.0.120/bin/startup.sh
-       sleep 5
-      
- 
-  
+      # tomcat 죽이기 톰캣버전 모르면 뒤에* 붙이기
+      - name: Stop Tomcat
+        run: |
+          /home/sist/apache-tomcat-9.0.120/bin/shutdown.sh || true
+          sleep 3
+
+      # .war파일이랑 압축이 풀어진 폴더 지우기
+      - name: Remove Old war
+        run: |
+          rm -rf /home/sist/apache-tomcat-9.0.120/webapps/SpringLastProject.war
+          rm -rf /home/sist/apache-tomcat-9.0.120/webapps/SpringLastProject
+
+      - name: Deploy war
+        run: |
+          cp target/*.war /home/sist/apache-tomcat-9.0.120/webapps/SpringLastProject.war
+
+      # tomcat 구동
+      - name: Tomcat start
+        run: |
+          nohup /home/sist/apache-tomcat-9.0.120/bin/startup.sh
+          sleep 5
