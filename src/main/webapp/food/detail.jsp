@@ -14,7 +14,7 @@
 </head>
 <body>
  <div class="container">
-    <div class="row">
+    <div class="row"> 
       <table class="table">
         <tr>
           <td width=30% class="text-center" rowspan="8"> 
