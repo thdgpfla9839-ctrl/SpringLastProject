@@ -42,6 +42,8 @@ jobs:
 
       # tomcat 구동
       - name: Tomcat start
+        env:
+          RUNNER_TRACKING_ID: ""
         run: |
           nohup /home/sist/apache-tomcat-9.0.120/bin/startup.sh
           sleep 5
