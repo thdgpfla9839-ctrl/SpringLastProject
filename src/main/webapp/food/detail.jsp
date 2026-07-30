@@ -17,7 +17,7 @@
     <div class="row">
       <table class="table">
         <tr>
-          <td width=30% class="text-center" rowspan="8">
+          <td width=30% class="text-center" rowspan="8"> 
             <img src="${vo.poster }" style="width: 290px;height: 250px">  
           </td>
           <td colspan="2">
