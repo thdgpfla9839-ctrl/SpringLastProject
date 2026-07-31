@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class FoodServiceImpl implements FoodService {
 
-	// »ı¼ºÀÚ¸¦ ÀÌ¿ëÇØ¼­ ±¸ÇöµÈ ¸ŞÆÛ Å¬·¡½ºÀÇ ÁÖ¼Ò ¹Ş±â => @autowired°¡ Æ÷ÇÔµÊ, ¹İµå½Ã final ºÙÀÌ±â
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ì¿ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ ï¿½Ş±ï¿½ => @autowiredï¿½ï¿½ ï¿½ï¿½ï¿½Ôµï¿½, ï¿½İµï¿½ï¿½ final ï¿½ï¿½ï¿½Ì±ï¿½
 	private final FoodMapper mapper;
 
 	@Override
@@ -31,7 +31,14 @@ public class FoodServiceImpl implements FoodService {
 	@Override
 	public FoodVO foodDetailData(int no) {
 		// TODO Auto-generated method stub
+		mapper.foodHitIncrement(no); // ìƒì„¸ë³´ê¸° ë„˜ê¸¸ ë•Œë§ˆë‹¤ ë°‘ì— ë³€ê²½ë¨
 		return mapper.foodDetailData(no);
+	}
+
+	@Override
+	public List<FoodVO> foodHit7Data() {
+		// TODO Auto-generated method stub
+		return mapper.foodHit7Data();
 	}
 	
 }

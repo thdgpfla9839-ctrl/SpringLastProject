@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
 	private final GoodsService gService; // �̰� DB
+	private final FoodService fService; // �̰� DB
 	
 	@GetMapping("main/main.do")
 	public String main_main(String page, Model model,HttpServletRequest request) // ��Ű �����;��ؼ� requset�� �߰�����
@@ -72,6 +73,8 @@ public class MainController {
 	    model.addAttribute("cList", cList);
 	    model.addAttribute("size",cList.size());
 	    
+	    
+	    List<FoodVO> fList =fService.foodHit7Data();
 	  
 		return "main/main";
 	}

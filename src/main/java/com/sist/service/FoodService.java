@@ -12,4 +12,6 @@ public interface FoodService {
 	public List<FoodVO> foodListData(@Param("start") int start, @Param("end") int end);
 	public int foodTotalPage();
 	public FoodVO foodDetailData(int no);
+	public List<FoodVO> foodHit7Data();
+
 }
