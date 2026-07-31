@@ -2,6 +2,7 @@ package com.sist.mapper;
 // 여기는 데이터베이스 연결
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -83,5 +84,32 @@ public interface BoardMapper {
 	 public void boardUpdateData(BoardVO vo);
 	 
 	// 3. 삭제  => 여기도 트랜젝션 사용
+	// 1) 정보읽기
+	 @Select("SELECT root,depth FROM springReplyBoard "
+			 +"WHERE no=#{no}")
+	 public BoardVO boardInfoData(int no);
+	 
+	 // 2) 비밀번호 체크
+	 @Select("SELECT pwd FROM springReplyBoard "
+			 +"WHERE no=#{no}")
+	 public String boardGetPassword(int no);
+	 
+	 // 3) 답변이 잇는 경우 / 답변이 없는 경우의 결과
+	 // 답변이 있는 경우
+	 @Update("UPDATE springReplyBoard SET "
+	 		+ "subject=#{subject},content=#{content} "
+			 +"WHERE no=#{no}")
+	 public void boardMsgUpdate(BoardVO vo);
+	 
+	 // 답변이 없는 경우에 삭제하는 방식
+	 @Delete("DELETE FROM springReplyBoard "
+			 +"WHERE no=#{no}")
+	 public void boardDelete(int no);
+	 
+	 // 4) 상위 게시물의 depth 변경
+	 @Update("UPDATE springReplyBoard SET "
+			 +"depth=depth-1 "
+			 +"WHERE no=#{no}")
+	 public void boardDepthDecrement(int no);
 	
 }

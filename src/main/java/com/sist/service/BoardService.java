@@ -19,6 +19,9 @@ public interface BoardService {
 	// 수정하기
 	 public void boardUpdateData(BoardVO vo);
 		
+	 //게시글 삭제하기(게시물 비번이 맞는지 틀린지 판단해야해서 불린)
+	 public boolean boardDelete(int no, String pwd);
+ 
 		
 		
 }

@@ -40,6 +40,7 @@ public class BoardController {
 		model.addAttribute("totalpage",totalpage);
 		model.addAttribute("count",count);
 		model.addAttribute("today", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+		model.addAttribute("msg","관리자가 삭제한 게시물입니다");
 		model.addAttribute("main_jsp","../board/list.jsp");
 		return "main/main"; // 포워드 기법 => 리퀘스트를 전송할 목족
 	}
@@ -71,7 +72,7 @@ public class BoardController {
 	@GetMapping("board/reply.do")
 	public String board_reply(int no, Model model)
 	{
-		model.addAttribute("no",no); // 누구 게시글에 대한 답글인지를 위해 써준다
+		model.addAttribute("no",no); // 누구 게시글에 대한 답글인지를 위해 번호 보내주는 것임
 		model.addAttribute("main_jsp","../board/reply.jsp");
 		return "main/main";
 	}
@@ -93,4 +94,23 @@ public class BoardController {
 		model.addAttribute("main_jsp","../board/update.jsp");
 		return "main/main";
 	}
+	
+	// 게시글 삭제하기
+	@GetMapping("board/delete.do")
+	public String board_delete(int no, Model model)
+	{
+		model.addAttribute("no",no); 
+		model.addAttribute("main_jsp","../board/delete.jsp");
+		return "main/main";
+	}
+	/*
+	 * // 게시글 삭제완료
+	 * 
+	 * @PostMapping("board/delete_ok.do") public String board_delete_ok(int no,
+	 * String pwd) { // 게시글 삭제가 되면 화면 출력할 거 없고 그냥 목록으로 돌아가면 되잖아 return
+	 * "redirect:../board/list.do";
+	 * 
+	 * } 여기서 작성해버리면 jsp안에 스크립트를 보낼 수가 없대 
+	 */
+
 }

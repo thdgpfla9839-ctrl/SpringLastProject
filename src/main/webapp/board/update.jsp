@@ -45,7 +45,7 @@ h3 {
           <td colspan="4" class="text-right">
             <a href="../board/reply.do?no=${vo.no }" class="btn btn-xs btn-warning">답변</a>
             <a href="#" class="btn btn-xs btn-info">완료</a>
-            <a href="#" class="btn btn-xs btn-success">취소</a>
+            <button type="button" class="btn-sm btn-danger" onclick="javascript:history.back()">취소</button>
             <a href="../board/list.do" class="btn btn-xs btn-danger">목록</a>
           </td>
         </tr>
