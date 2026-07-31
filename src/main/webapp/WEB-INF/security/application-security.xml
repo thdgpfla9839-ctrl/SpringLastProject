@@ -1,23 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-<!--  주석추가 -->
-    <context:component-scan base-package="com.sist.*"/>
-    
-    <!--  권한 설정 -->
-    <!--  로그인 처리 -->
-    <!--  로그아웃 처리 -->
-    <!--  자동로그인 처리 -->
-    <!--  비밀번호 암호화 처리 -->
-    <beans:bean
-        id="bcryptEncoder"
-        class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"
-       />
+	<!-- 주석추가 -->
+
+
+	<context:component-scan base-package="com.sist.*" />
+
+	<!-- 권한 설정 -->
+	<http auto-config="true" use-expressions="true">
+		<csrf disabled="true" /> <!-- 해킹방지를 위한 에러 => 사이트 위조 방지도 됨 => 사이트 위조하는 파밍방식을 방지해줌, 사용자의 의도와 관계없이 행해지는 해킹을 방지해준다 -->
+		<intercept-url pattern="/member/**" access="permitAll" /> <!-- 멤버안에 누구나 접근이 가능 -->
+		<intercept-url pattern="/admin/**"  access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/**" access="permitAll" />
+		<intercept-url pattern="/member/login.do" access="permitAll" />
+
+
+   <!-- login.do => <form-login> => 실패 / 성공 => session에 정보 저장 주석추가하기 -->
+
+
+
+
+	<!-- 로그인 처리 -->
+		<form-login login-page="/member/login.do"
+			login-processing-url="/member/login.do" username-parameter="userid"
+			password-parameter="userpwd" always-use-default-target="false"
+			authentication-failure-handler-ref="loginFailureHandler"
+			authentication-success-handler-ref="loginSuccessHandler" />
+
+
+		<!-- <remember-me/> -->
+		<!-- 로그아웃 처리 -->
+		<logout logout-url="/member/logout.do"
+			invalidate-session="true" logout-success-url="/main/main.do" />
+	</http>
+	<beans:bean id="loginSuccessHandler" class="com.sist.security.LoginSuccessHandler" />
+	<beans:bean id="loginFailureHandler" class="com.sist.security.LoginFailureHandler" />
+
+	<!-- 데이터베이스 연결 : session에 저장 -->
+	<jdbc-user-service data-source-ref="ds"
+		id="userServive"
+		users-by-username-query="SELECT userid as username,userpwd as password,enable FROM springMember WHERE userid=?"
+		authorities-by-username-query="SELECT userid as username,authority FROM authority WHERE userid=?"/>
+
+	<!-- 인증관리자 등록 -->
+	<authentication-manager>
+		<authentication-provider
+			user-service-ref="userServive">
+			<password-encoder ref="bcryptEncoder"/>
+		</authentication-provider>
+	</authentication-manager>
+
+	<!-- 비밀번호 암호화 처리 -->
+	<beans:bean id="bcryptEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 </beans:beans>
