@@ -33,9 +33,7 @@ Controller → Service(Impl) → Mapper(MyBatis) → Oracle DB
 
 ### 1) 수동 배포 (Tomcat)
 
-bash
 
-```bash
 # 로컬에서 WAR export 후 WinSCP로 우분투 서버에 업로드
 sudo mv SpringLastProject.war ./apache-tomcat-9.0.120/webapps/
 cd apache-tomcat-9.0.120/
