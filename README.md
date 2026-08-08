@@ -87,7 +87,8 @@ push 한 번으로 빌드부터 배포까지 자동화됨
 <aside>
 💡
 
-!image.png
+[ERROR] The goal you specified requires a project to execute but there is no POM in this directory
+(/home/sist/actions-runner/_work/SpringLastProject/SpringLastProject)
 
 </aside>
 
